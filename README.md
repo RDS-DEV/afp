@@ -1,1 +1,2 @@
-# afp
+# Analytics Framework Project
+
