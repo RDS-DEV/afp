@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Agency">
+
+    <select id="selectAgency" resultType="agency">
+        select ID, NAME from AGENCY where
+        id = #{id}
+    </select>
+
+    <insert id="insertAgency">
+        insert into Agency (id, name)
+        values (#{id}, #{name})
+    </insert>
+
+    <update id="updateAgency">
+        UPDATE AGENCY SET NAME = #{name} WHERE ID = #{id}
+    </update>
+
+    <delete id="deleteAgency">
+        DELETE FROM AGENCY WHERE ID = #{id}
+    </delete>
+
+    <select id="selectAllAgencies" resultType="Agency">
+        select * from Agency
+    </select>
+
+
+
+    <!--
+    <update id="createTable">
+        CREATE TABLE AGENCY (ID INT PRIMARY KEY, NAME VARCHAR(50))
+    </update>
+    -->
+
+
+</mapper>
