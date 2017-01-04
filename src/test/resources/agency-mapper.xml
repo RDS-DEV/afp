@@ -24,7 +24,7 @@
     </delete>
 
     <select id="selectAllAgencies" resultType="Agency">
-        select * from Agency
+        select agency_id as id, agency_name as name, agency_location as location from Agency
     </select>
 
 
