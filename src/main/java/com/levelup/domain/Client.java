@@ -9,7 +9,7 @@ public class Client {
 
     private Integer client_id;
     private String client_name;
-    private Integer client_phone;
+    private String client_phone;
     private String city;
     private String state;
 
@@ -29,11 +29,11 @@ public class Client {
         this.client_name = client_name;
     }
 
-    public Integer getClient_phone() {
+    public String getClient_phone() {
         return client_phone;
     }
 
-    public void setClient_phone(Integer client_phone) {
+    public void setClient_phone(String client_phone) {
         this.client_phone = client_phone;
     }
 
@@ -55,6 +55,6 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" + "client_id=" + client_id + ", client_name='" + client_name + '\'' + ", client_phone=" + client_phone + ", city='" + city + '\'' + ", state='" + state + '\'' + '}';
+        return "Client{" + "client_id=" + client_id + ", client_name='" + client_name + '\'' + ", client_phone='" + client_phone + '\'' + ", city='" + city + '\'' + ", state='" + state + '\'' + '}';
     }
 }
