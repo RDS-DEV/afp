@@ -20,9 +20,9 @@
                 <property agencyName="password" value="me" />
                 -->
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/aes" />
-                <property name="username" value="root" />
-                <property name="password" value="Georgia1?" />
+                <property name="url" value="jdbc:mysql://localhost:3306/aes?verifyServerCertificate=false&amp;useSSL=true" />
+                <property name="username" value="prpadmin" />
+                <property name="password" value="abcd1234" />
             </dataSource>
         </environment>
     </environments>
