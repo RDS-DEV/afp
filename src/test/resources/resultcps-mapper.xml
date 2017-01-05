@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Resultcps">
+
+    <resultMap id="policyResult" type="policy">
+        <id property="policy_id" column="policy_id" />
+        <result property="policy_name" column="policy_name" />
+        <collection property="clients" javaType="ArrayList" column="client_id" ofType="Client" select="selectClientsForPolicy"/>
+    </resultMap>
+
+    <select id="selectPolicyResult" resultMap="policyResult">
+        SELECT policy_id, policy_name, policy_type, policy_number FROM policy WHERE policy_id = #{policy_id}
+    </select>
+
+    <select id="selectClientsForPolicy" resultType="client">
+        SELECT client_id, client_name, client_phone FROM client WHERE client_id = #{client_id}
+    </select>
+
+    <resultMap id="allPoliciesResult" type="policy">
+        <id property="policy_id" column="policy_id" />
+        <collection property="clients" javaType="ArrayList" column="policy_id" ofType="Client" select="selectClientsForPolicy"/>
+    </resultMap>
+
+    <select id="selectAllPoliciesResult" resultMap="policyResult">
+        SELECT id, name, location FROM policy
+    </select>
+
+
+    <resultMap id="allPoliciesJoinResult" type="Policy">
+        <id property="id" column="agency_id" />
+        <result property="name" column="agency_name"/>
+        <result property="location" column="agency_location"/>
+        <collection property="employees" ofType="Employee">
+            <id property="id" column="emp_id"/>
+            <result property="name" column="emp_name"/>
+            <result property="agencyId" column="agencyId"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectAllAgenciesJoin" resultMap="allAgenciesJoinResult">
+        SELECT A.agency_id as id, A.agency_name as name,
+        A.agency_location as location,E.emp_id,E.emp_name
+        FROM AGENCY A LEFT OUTER JOIN EMPLOYEE E ON A.AGENCY_ID=E.AGENCY_ID
+    </select>
+
+    <!--
+    <select id="selectEmployeesForAgency" resultType="employee">
+        SELECT emp_id as id, emp_name as name, agency_id as agencyId FROM employee WHERE agency_id = #{id}
+    </select>
+    -->
+</mapper>
+
