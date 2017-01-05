@@ -33,5 +33,6 @@
     <mappers>
         <mapper resource="client-mapper.xml" />
         <mapper resource="policy-mapper.xml" />
+        <mapper resource="resultcps-mapper.xml"/>
     </mappers>
 </configuration>

@@ -5,51 +5,41 @@
 
 <mapper namespace="Resultcps">
 
-    <resultMap id="policyResult" type="policy">
-        <id property="policy_id" column="policy_id" />
-        <result property="policy_name" column="policy_name" />
-        <collection property="clients" javaType="ArrayList" column="client_id" ofType="Client" select="selectClientsForPolicy"/>
-    </resultMap>
-
-    <select id="selectPolicyResult" resultMap="policyResult">
-        SELECT policy_id, policy_name, policy_type, policy_number FROM policy WHERE policy_id = #{policy_id}
-    </select>
-
-    <select id="selectClientsForPolicy" resultType="client">
-        SELECT client_id, client_name, client_phone FROM client WHERE client_id = #{client_id}
-    </select>
 
     <resultMap id="allPoliciesResult" type="policy">
-        <id property="policy_id" column="policy_id" />
-        <collection property="clients" javaType="ArrayList" column="policy_id" ofType="Client" select="selectClientsForPolicy"/>
+        <id property="id" column="policy_id" />
+        <result property="name" column="policy_name"/>
+        <result property="type" column="policy_type"/>
+        <result property="number" column="policy_number"/>
     </resultMap>
 
-    <select id="selectAllPoliciesResult" resultMap="policyResult">
-        SELECT id, name, location FROM policy
+    <select id="selectAllPoliciesResult" resultMap="allPoliciesResult">
+        SELECT * FROM policy
     </select>
 
+    <resultMap id="allPoliciesJoinResult" type="policy">
+        <id property="id" column="policy_id" />
+        <result property="name" column="policy_name"/>
+        <result property="type" column="policy_type"/>
+        <result property="number" column="policy_number"/>
+        <result property="emp_id" column="emp_id"/>
+        <collection property="clients" ofType="Client">
+            <id property="id" column="client_id"/>
+            <result property="name" column="client_name"/>
+            <result property="phone" column="client_phone"/>
+            <result property="city" column="city"/>
+            <result property="state" column="state"/>
 
-    <resultMap id="allPoliciesJoinResult" type="Policy">
-        <id property="id" column="agency_id" />
-        <result property="name" column="agency_name"/>
-        <result property="location" column="agency_location"/>
-        <collection property="employees" ofType="Employee">
-            <id property="id" column="emp_id"/>
-            <result property="name" column="emp_name"/>
-            <result property="agencyId" column="agencyId"/>
         </collection>
     </resultMap>
 
-    <select id="selectAllAgenciesJoin" resultMap="allAgenciesJoinResult">
-        SELECT A.agency_id as id, A.agency_name as name,
-        A.agency_location as location,E.emp_id,E.emp_name
-        FROM AGENCY A LEFT OUTER JOIN EMPLOYEE E ON A.AGENCY_ID=E.AGENCY_ID
+    <select id="selectAllPoliciesJoin" resultMap="allPoliciesJoinResult">
+        SELECT A.policy_id, A.policy_name,
+        A.policy_type, A.policy_number, A.emp_id , E.client_id , E.client_name, E.client_phone , E.city , E.state
+        FROM POLICY A LEFT OUTER JOIN CLIENT E ON A.CLIENT_ID=E.CLIENT_ID ORDER BY emp_id
     </select>
 
-    <!--
-    <select id="selectEmployeesForAgency" resultType="employee">
-        SELECT emp_id as id, emp_name as name, agency_id as agencyId FROM employee WHERE agency_id = #{id}
-    </select>
-    -->
+
+
 </mapper>
 

@@ -33,25 +33,18 @@
     <resultMap id="allAgenciesJoinResult" type="Agency">
         <id property="id" column="agency_id" />
         <result property="name" column="agency_name"/>
-        <result property="location" column="location"/>
+        <result property="location" column="agency_location"/>
         <collection property="employees" ofType="Employee">
             <id property="id" column="emp_id"/>
             <result property="name" column="emp_name"/>
-            <result property="agencyId" column="agencyId"/>
+            <result property="agencyId" column="agency_id"/>
         </collection>
     </resultMap>
 
     <select id="selectAllAgenciesJoin" resultMap="allAgenciesJoinResult">
-        select
-        A.id as agency_id,
-        A.name as agency_name,
-        A.location,
-        E.emp_id as emp_id,
-        E.emp_name as emp_name,
-        E.agency_id as agencyId
-        from Agency A
-        left outer join Employee E on A.id = E.agency_id
-        order by A.id
+       SELECT A.agency_id , A.agency_name as name,
+        A.agency_location as location,E.emp_id,E.emp_name
+        FROM AGENCY A LEFT OUTER JOIN EMPLOYEE E ON A.AGENCY_ID=E.AGENCY_ID
     </select>
 
     <!--

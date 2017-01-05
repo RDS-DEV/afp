@@ -1,46 +1,49 @@
 package com.levelup.domain;
 
+import java.util.List;
+
 /**
  * Created by Monica.Vadlapudi on 1/3/2017.
  */
 public class Policy {
-    private int policy_id;
-    private String policy_name;
-    private String policy_type;
-    private int policy_number;
+    private int id;
+    private String name;
+    private String type;
+    private int number;
     private int client_id;
     private int emp_id;
+    private List<Client> clients;
 
-    public int getPolicy_id() {
-        return policy_id;
+    public int getId() {
+        return id;
     }
 
-    public void setPolicy_id(int policy_id) {
-        this.policy_id = policy_id;
+    public void setId(int id) {
+        this.id = id;
     }
 
-    public String getPolicy_name() {
-        return policy_name;
+    public String getName() {
+        return name;
     }
 
-    public void setPolicy_name(String policy_name) {
-        this.policy_name = policy_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getPolicy_type() {
-        return policy_type;
+    public String getType() {
+        return type;
     }
 
-    public void setPolicy_type(String policy_type) {
-        this.policy_type = policy_type;
+    public void setType(String type) {
+        this.type = type;
     }
 
-    public int getPolicy_number() {
-        return policy_number;
+    public int getNumber() {
+        return number;
     }
 
-    public void setPolicy_number(int policy_number) {
-        this.policy_number = policy_number;
+    public void setNumber(int number) {
+        this.number = number;
     }
 
     public int getClient_id() {
@@ -59,10 +62,28 @@ public class Policy {
         this.emp_id = emp_id;
     }
 
+    public List<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(List<Client> clients) {
+        this.clients = clients;
+    }
+
     @Override
     public String toString() {
-        return "Policy{" + "policy_id=" + policy_id + ", policy_name='" + policy_name + '\'' + ", policy_type='" + policy_type + '\'' + ", policy_number=" + policy_number + ", client_id=" + client_id + ", emp_id=" + emp_id + '}';
+        return "Policy{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", type='" + type + '\'' +
+                ", number=" + number +
+                ", client_id=" + client_id +
+                ", emp_id=" + emp_id +
+                ", clients=" + clients +
+                '}';
     }
 }
+
+
 
 

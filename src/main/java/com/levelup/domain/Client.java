@@ -7,34 +7,34 @@ import java.util.List;
  */
 public class Client {
 
-    private Integer client_id;
-    private String client_name;
-    private String client_phone;
+    private Integer id;
+    private String name;
+    private String phone;
     private String city;
     private String state;
 
-    public Integer getClient_id() {
-        return client_id;
+    public Integer getId() {
+        return id;
     }
 
-    public void setClient_id(Integer client_id) {
-        this.client_id = client_id;
+    public void setId(Integer id) {
+        this.id = id;
     }
 
-    public String getClient_name() {
-        return client_name;
+    public String getName() {
+        return name;
     }
 
-    public void setClient_name(String client_name) {
-        this.client_name = client_name;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getClient_phone() {
-        return client_phone;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setClient_phone(String client_phone) {
-        this.client_phone = client_phone;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getCity() {
@@ -55,6 +55,12 @@ public class Client {
 
     @Override
     public String toString() {
-        return "Client{" + "client_id=" + client_id + ", client_name='" + client_name + '\'' + ", client_phone='" + client_phone + '\'' + ", city='" + city + '\'' + ", state='" + state + '\'' + '}';
+        return "Client{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", phone='" + phone + '\'' +
+                ", city='" + city + '\'' +
+                ", state='" + state + '\'' +
+                '}';
     }
 }
