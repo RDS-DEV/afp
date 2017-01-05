@@ -34,7 +34,7 @@ public class ResultMapTest {
     public void testSelectEmployeeResultMap() {
 
         Employee employee = new Employee();
-        employee.setId(105);
+        employee.setEmpId(105);
         Map<Object, Object> result = session.selectMap("selectEmployeeAsMap", employee, "emp_id");
         System.out.println(result);
     }

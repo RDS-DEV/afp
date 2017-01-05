@@ -6,13 +6,13 @@
 <mapper namespace="Result">
 
     <resultMap id="agencyResult" type="agency">
-        <id property="id" column="id" />
-        <result property="name" column="name" />
+        <id property="agencyId" column="agency_id" />
+        <result property="AgencyName" column="agency_name" />
         <collection property="employees" javaType="ArrayList" column="id" ofType="Employee" select="selectEmployeesForAgency"/>
     </resultMap>
 
     <select id="selectAgencyResult" resultMap="agencyResult">
-        SELECT id, name, location FROM agency WHERE ID = #{id}
+        SELECT agency_id, agency_name, agency_location FROM agency WHERE agency_id = #{id}
     </select>
 
     <select id="selectEmployeesForAgency" resultType="employee">

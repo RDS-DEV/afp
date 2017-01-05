@@ -34,11 +34,12 @@ public class TestCRUDOperations {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         session = sqlSessionFactory.openSession();
 
-        newAgency.setId(30);
-        newAgency.setName("Nationwide Insurance");
+        newAgency.setAgencyId(30);
+        newAgency.setAgencyName("Nationwide Insurance");
+        newAgency.setAgencyLocation("West Lafayette, IN");
 
-        newEmployee.setId(201);
-        newEmployee.setName("James Thurber");
+
+        newEmployee.setEmpName("James Thurber");
         newEmployee.setAgencyId(20);
 
     }
@@ -63,7 +64,7 @@ public class TestCRUDOperations {
     @Test
     public void testInsertNewAgency() {
 
-        System.out.println("\nInsertNewAgency: id = " + newAgency.getId());
+        System.out.println("\nInsertNewAgency: id = " + newAgency.getAgencyId());
         session.insert("insertAgency", newAgency);
         session.commit();
 
@@ -73,7 +74,7 @@ public class TestCRUDOperations {
     public void testUpdateOneAgency() {
 
         System.out.println("\nUpdateNewAgency: name = Geico Insurance");
-        newAgency.setName("Geico Insurance");
+        newAgency.setAgencyName("Geico Insurance");
         session.update("updateAgency", newAgency);
         session.commit();
 
@@ -98,6 +99,15 @@ public class TestCRUDOperations {
     }
 
     @Test
+    public void testSelectEmployeeByName() {
+
+        System.out.println("\nSelectEmployeeByName: empName = 'Mel Torme'");
+        employee = session.selectOne("selectEmployeeByName", "Mel Torme");
+        System.out.println(employee);
+
+    }
+
+    @Test
     public void testSelectAllEmployees() {
         List<Employee> employees = session.selectList("selectAllEmployees");
         for (Employee emp : employees) {
@@ -108,8 +118,9 @@ public class TestCRUDOperations {
     @Test
     public void testInsertOneEmployee() {
 
-        System.out.println("\nInsertOneEmployee: id = " + newEmployee.getId());
+        System.out.println("\nInsertOneEmployee: empId = " + newEmployee.getEmpId());
         session.insert("insertEmployee", newEmployee);
+        newEmployee = session.selectOne("selectEmployeeByName", newEmployee.getEmpName());
         System.out.println(newEmployee);
         session.commit();
 
@@ -128,7 +139,7 @@ public class TestCRUDOperations {
     @Test
     public void testDeleteNewEmployee() {
 
-        System.out.println("\nDeleteNewEmployee: id = " + newEmployee.getId());
+        System.out.println("\nDeleteNewEmployee: id = " + newEmployee.getEmpId());
         session.delete("deleteEmployee", newEmployee);
         session.commit();
 

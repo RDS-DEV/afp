@@ -6,31 +6,31 @@
 <mapper namespace="Agency">
 
     <select id="selectAgency" resultType="agency">
-        select ID, NAME from AGENCY where
-        id = #{id}
+        select agency_id as agencyId, agency_name as agencyName from agency where
+        agency_id = #{agencyId}
     </select>
 
     <insert id="insertAgency">
-        insert into Agency (id, name)
-        values (#{id}, #{name})
+        insert into Agency (agency_id, agency_name, agency_location)
+        values (#{agencyId}, #{agencyName}, #{agencyLocation})
     </insert>
 
     <update id="updateAgency">
-        UPDATE AGENCY SET NAME = #{name} WHERE ID = #{id}
+        update agency set agency_name = #{agencyName} where agency_id = #{agencyId}
     </update>
 
     <delete id="deleteAgency">
-        DELETE FROM AGENCY WHERE ID = #{id}
+        delete from agency where agency_id = #{agencyId}
     </delete>
 
     <select id="selectAllAgencies" resultType="Agency">
-        select * from Agency
+        select agency_id as agencyId, agency_name as agencyName, agency_location as agencyLocation from Agency
     </select>
 
 
 
     <!--
-    <update id="createTable">
+    <update agencyId="createTable">
         CREATE TABLE AGENCY (ID INT PRIMARY KEY, NAME VARCHAR(50))
     </update>
     -->

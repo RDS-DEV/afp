@@ -14,13 +14,13 @@
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <!--
-                <property name="driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-                <property name="url" value="jdbc:derby:myDB;create=true;user=me;password=me" />
-                <property name="username" value="me" />
-                <property name="password" value="me" />
+                <property agencyName="driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+                <property agencyName="url" value="jdbc:derby:myDB;create=true;user=me;password=me" />
+                <property agencyName="username" value="me" />
+                <property agencyName="password" value="me" />
                 -->
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/myDB" />
+                <property name="url" value="jdbc:mysql://localhost:3306/aes" />
                 <property name="username" value="root" />
                 <property name="password" value="Georgia1?" />
             </dataSource>
