@@ -5,24 +5,24 @@ package com.levelup.domain;
  */
 public class Employee {
 
-    private Integer id;
-    private String name;
+    private Integer empId;
+    private String empName;
     private Integer agencyId;
 
-    public Integer getId() {
-        return id;
+    public Integer getEmpId() {
+        return empId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setEmpId(Integer empId) {
+        this.empId = empId;
     }
 
-    public String getName() {
-        return name;
+    public String getEmpName() {
+        return empName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setEmpName(String empName) {
+        this.empName = empName;
     }
 
     public Integer getAgencyId() {
@@ -35,7 +35,7 @@ public class Employee {
 
     @Override
     public String toString() {
-        return "Employee [id = " + id + ", name = " + name + ", agencyId = " + agencyId + "]";
+        return "Employee [empId = " + empId + ", empName = " + empName + ", agencyId = " + agencyId + "]";
     }
 
 }

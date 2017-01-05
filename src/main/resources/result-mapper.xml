@@ -5,58 +5,58 @@
 
 <mapper namespace="Result">
 
-    <resultMap id="agencyResult" type="agency">
-        <id property="id" column="id" />
-        <result property="name" column="name" />
-        <collection property="employees" javaType="ArrayList" column="id" ofType="Employee" select="selectEmployeesForAgency"/>
+    <resultMap agencyId="agencyResult" type="agency">
+        <agencyId property="agencyId" column="agencyId" />
+        <result property="agencyName" column="agencyName" />
+        <collection property="employees" javaType="ArrayList" column="agencyId" ofType="Employee" select="selectEmployeesForAgency"/>
     </resultMap>
 
-    <select id="selectAgencyResult" resultMap="agencyResult">
-        SELECT id, name, location FROM agency WHERE ID = #{id}
+    <select agencyId="selectAgencyResult" resultMap="agencyResult">
+        SELECT agencyId, agencyName, agencyLocation FROM agency WHERE ID = #{agencyId}
     </select>
 
-    <select id="selectEmployeesForAgency" resultType="employee">
-        SELECT emp_id as id, emp_name as name, agency_id as agencyId FROM employee WHERE agency_id = #{id}
+    <select agencyId="selectEmployeesForAgency" resultType="employee">
+        SELECT emp_id as agencyId, emp_name as agencyName, agency_id as agencyId FROM employee WHERE agency_id = #{agencyId}
     </select>
 
-    <resultMap id="allAgenciesResult" type="agency">
-        <id property="id" column="id" />
-        <!--<result property="name" column="name" />-->
-        <collection property="employees" javaType="ArrayList" column="id" ofType="Employee" select="selectEmployeesForAgency"/>
+    <resultMap agencyId="allAgenciesResult" type="agency">
+        <agencyId property="agencyId" column="agencyId" />
+        <!--<result property="agencyName" column="agencyName" />-->
+        <collection property="employees" javaType="ArrayList" column="agencyId" ofType="Employee" select="selectEmployeesForAgency"/>
     </resultMap>
 
-    <select id="selectAllAgenciesResult" resultMap="agencyResult">
-        SELECT id, name, location FROM agency
+    <select agencyId="selectAllAgenciesResult" resultMap="agencyResult">
+        SELECT agencyId, agencyName, agencyLocation FROM agency
     </select>
 
 
-    <resultMap id="allAgenciesJoinResult" type="Agency">
-        <id property="id" column="agency_id" />
-        <result property="name" column="agency_name"/>
-        <result property="location" column="location"/>
+    <resultMap agencyId="allAgenciesJoinResult" type="Agency">
+        <agencyId property="agencyId" column="agency_id" />
+        <result property="agencyName" column="agency_name"/>
+        <result property="agencyLocation" column="agencyLocation"/>
         <collection property="employees" ofType="Employee">
-            <id property="id" column="emp_id"/>
-            <result property="name" column="emp_name"/>
+            <agencyId property="agencyId" column="emp_id"/>
+            <result property="agencyName" column="emp_name"/>
             <result property="agencyId" column="agencyId"/>
         </collection>
     </resultMap>
 
-    <select id="selectAllAgenciesJoin" resultMap="allAgenciesJoinResult">
+    <select agencyId="selectAllAgenciesJoin" resultMap="allAgenciesJoinResult">
         select
-        A.id as agency_id,
-        A.name as agency_name,
-        A.location,
+        A.agencyId as agency_id,
+        A.agencyName as agency_name,
+        A.agencyLocation,
         E.emp_id as emp_id,
         E.emp_name as emp_name,
         E.agency_id as agencyId
         from Agency A
-        left outer join Employee E on A.id = E.agency_id
-        order by A.id
+        left outer join Employee E on A.agencyId = E.agency_id
+        order by A.agencyId
     </select>
 
     <!--
-    <select id="selectEmployeesForAgency" resultType="employee">
-        SELECT emp_id as id, emp_name as name, agency_id as agencyId FROM employee WHERE agency_id = #{id}
+    <select agencyId="selectEmployeesForAgency" resultType="employee">
+        SELECT emp_id as agencyId, emp_name as agencyName, agency_id as agencyId FROM employee WHERE agency_id = #{agencyId}
     </select>
     -->
 </mapper>

@@ -7,33 +7,33 @@ import java.util.List;
  */
 public class Agency {
 
-    private Integer id;
-    private String name;
-    private String location;
+    private Integer agencyId;
+    private String agencyName;
+    private String agencyLocation;
     private List<Employee> employees;
 
-    public Integer getId() {
-        return id;
+    public Integer getAgencyId() {
+        return agencyId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setAgencyId(Integer agencyId) {
+        this.agencyId = agencyId;
     }
 
-    public String getName() {
-        return name;
+    public String getAgencyName() {
+        return agencyName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAgencyName(String agencyName) {
+        this.agencyName = agencyName;
     }
 
-    public String getLocation() {
-        return location;
+    public String getAgencyLocation() {
+        return agencyLocation;
     }
 
-    public void setLocation(String location) {
-        this.location = location;
+    public void setAgencyLocation(String agencyLocation) {
+        this.agencyLocation = agencyLocation;
     }
 
     public List<Employee> getEmployees() {
@@ -46,6 +46,6 @@ public class Agency {
 
     @Override
     public String toString() {
-        return "Agency [id = " + id + ", name = " + name + ", employees = " + employees + "]";
+        return "Agency [agencyId = " + agencyId + ", agencyName = " + agencyName + ", employees = " + employees + "]";
     }
 }
