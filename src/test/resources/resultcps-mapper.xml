@@ -27,8 +27,8 @@
             <id property="id" column="client_id"/>
             <result property="name" column="client_name"/>
             <result property="phone" column="client_phone"/>
-            <result property="city" column="city"/>
-            <result property="state" column="state"/>
+            <result property="city" column="client_city"/>
+            <result property="state" column="client_state"/>
 
         </collection>
     </resultMap>
@@ -39,6 +39,28 @@
         FROM POLICY A LEFT OUTER JOIN CLIENT E ON A.CLIENT_ID=E.CLIENT_ID ORDER BY emp_id
     </select>
 
+    <resultMap id="allClientsJoinResult" type="client">
+        <id property="id" column="client_id"/>
+        <result property="name" column="client_name"/>
+        <result property="phone" column="client_phone"/>
+        <result property="city" column="client_city"/>
+        <result property="state" column="client_state"/>
+        <collection property="policies" ofType="Policy">
+            <id property="id" column="policy_id" />
+            <result property="name" column="policy_name"/>
+            <result property="type" column="policy_type"/>
+            <result property="number" column="policy_number"/>
+            <result property="emp_id" column="emp_id"/>
+
+        </collection>
+    </resultMap>
+
+    <select id="selectClientsJoinResult" resultMap="allClientsJoinResult">
+    select P.policy_number, P.policy_type , P.policy_name , P.emp_id ,
+    C.client_id , C.client_name , C.client_city ,
+    C.client_state from policy P Inner Join client C
+    where P.policy_name = "home";
+    </select>
 
 
 </mapper>

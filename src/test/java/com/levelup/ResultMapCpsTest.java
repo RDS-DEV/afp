@@ -52,9 +52,9 @@ public class ResultMapCpsTest {
 
 
     @Test
-    public void testSelectAllPoliciesJoin() {
+    public void testSelectAllClientsJoin() {
 
-        List<Policy> policies = session.selectList("selectAllPoliciesJoin");
+        List<Policy> policies = session.selectList("selectClientsJoinResult");
         System.out.println(policies);
 
     }
