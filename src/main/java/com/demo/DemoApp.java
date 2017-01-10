@@ -2,13 +2,15 @@ package com.demo;
 
 import com.demo.user.bo.UserBO;
 import com.demo.user.vo.UserVO;
+import com.levelup.domain.Agency;
+import org.apache.ibatis.session.SqlSession;
 
 /**
  * Created by jarsen on 1/10/17.
  */
 public class DemoApp {
 
-    public static void main(String a[])throws Exception{
+    public static void main(String args[])throws Exception{
 
         UserBO bo = new UserBO();
         UserVO vo= new UserVO();
@@ -37,6 +39,18 @@ public class DemoApp {
         System.out.println("\n\nDeleting user with id = 1 from database");
         bo.deleteUser(vo);
         System.out.println("List of current users in database:" + bo.getUsers());
+
+        getOneAgency(10);
+
+    }
+
+    private static void getOneAgency(int agency_id) {
+
+        SqlSession session = ConnectionFactory.getAgencySession().openSession();
+
+        System.out.println("\n\nSelectOneAgency: id = 10");
+        Agency agency = session.selectOne("selectAgency", 10);
+        System.out.println(agency);
 
     }
 }
