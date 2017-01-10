@@ -1,4 +1,4 @@
-package com.mybatis.demo.user.vo;
+package com.demo.user.vo;
 
 import java.io.Serializable;
 

@@ -1,4 +1,4 @@
-package com.mybatis.demo;
+package com.demo;
 
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSessionFactory;

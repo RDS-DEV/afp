@@ -1,6 +1,6 @@
-package com.mybatis.demo.user.dao;
+package com.demo.user.dao;
 
-import com.mybatis.demo.user.vo.UserVO;
+import com.demo.user.vo.UserVO;
 import org.apache.ibatis.annotations.Delete;
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Select;
@@ -12,7 +12,7 @@ public interface UserDAO {
 
     String MQL_GET_ALL_USERS  = "select * from users";
     String MQL_GET_USER_BY_ID = "select * from users where id = #{id}";
-    String MQL_CREATE_USER    = "insert into users (fullName, email, address, mobile) values (#{fullName},#{email},#{address},#{mobile})";
+    String MQL_CREATE_USER    = "insert into users (id, fullName, email, address, mobile) values (#{id},#{fullName},#{email},#{address},#{mobile})";
     String MQL_UPDATE_USER    = "update users set fullName=#{fullName}, email=#{email}, address=#{address}, mobile=#{mobile} where id=#{id}";
     String MQL_DELETE_USER    = "delete from users where id=#{id}";
 
