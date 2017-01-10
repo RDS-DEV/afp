@@ -6,22 +6,10 @@
 <mapper namespace="Client">
 
     <select id="selectClient" resultType="client">
-        select ID, NAME from CLIENT where
-        id = #{id}
+        select client_id as id, client_name as NAME from CLIENT where
+        client_id = #{id}
     </select>
 
-    <insert id="insertClient">
-        insert into Agency (id, name)
-        values (#{id}, #{name})
-    </insert>
-
-    <update id="updateClient">
-        UPDATE AGENCY SET NAME = #{name} WHERE ID = #{id}
-    </update>
-
-    <delete id="deleteClient">
-        DELETE FROM AGENCY WHERE ID = #{id}
-    </delete>
 
     <select id="selectAllClients" resultType="Client">
         select * from Client

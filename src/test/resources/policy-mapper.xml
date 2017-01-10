@@ -5,23 +5,10 @@
 
 <mapper namespace="Policy">
 
+
     <select id="selectPolicy" resultType="policy">
-        select ID, NAME from Policy where
-        id = #{id}
+        select policy_id  as id , policy_name as name , policy_type as type , policy_number as number from Policy where policy_id = #{id}
     </select>
-
-    <insert id="insertPolicy">
-        insert into Agency (id, name)
-        values (#{id}, #{name})
-    </insert>
-
-    <update id="updatePolicy">
-        UPDATE AGENCY SET NAME = #{name} WHERE ID = #{id}
-    </update>
-
-    <delete id="deletePolicy">
-        DELETE FROM AGENCY WHERE ID = #{id}
-    </delete>
 
     <select id="selectAllPolicies" resultType="Policy">
         select * from Policy

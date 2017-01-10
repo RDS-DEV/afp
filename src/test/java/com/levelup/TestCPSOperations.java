@@ -39,6 +39,14 @@ public class TestCPSOperations {
 
     }
 
+    @Test
+    public void testSelectOnePolicy() {
+
+        System.out.println("\nSelectOnePolicy: id = 108 ");
+        Policy policy = session.selectOne("selectPolicy", 108);
+        System.out.println(policy);
+
+    }
 
     @Test
     public void testSelectAllPolicies() {
@@ -47,6 +55,8 @@ public class TestCPSOperations {
             System.out.println(p);
         }
     }
+
+
 
 
     @Test

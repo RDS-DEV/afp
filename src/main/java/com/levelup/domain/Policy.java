@@ -12,7 +12,6 @@ public class Policy {
     private int number;
     private int client_id;
     private int emp_id;
-    private List<Client> clients;
 
     public int getId() {
         return id;
@@ -62,13 +61,6 @@ public class Policy {
         this.emp_id = emp_id;
     }
 
-    public List<Client> getClients() {
-        return clients;
-    }
-
-    public void setClients(List<Client> clients) {
-        this.clients = clients;
-    }
 
     @Override
     public String toString() {
@@ -79,7 +71,6 @@ public class Policy {
                 ", number=" + number +
                 ", client_id=" + client_id +
                 ", emp_id=" + emp_id +
-                ", clients=" + clients +
                 '}';
     }
 }
