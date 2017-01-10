@@ -5,53 +5,58 @@
 
 <mapper namespace="Employee">
 
-    <select agencyId="selectEmployee" resultType="employee">
-        select emp_id as agencyId, emp_name as agencyName, agency_id as agencyId from Employee where
-        emp_id = #{agencyId}
+    <select id="selectEmployee" resultType="employee">
+        select emp_id as empId, emp_name as empName, agency_id as agencyId from Employee where
+        emp_id = #{empId}
     </select>
 
-    <insert agencyId="insertEmployee">
+    <select id="selectEmployeeByName" resultType="employee">
+        select emp_id as empId, emp_name as empName, agency_id as agencyId from Employee where
+        emp_name = #{empName}
+    </select>
+
+    <insert id="insertEmployee">
         insert into Employee (emp_id, emp_name, agency_id)
-        values (#{agencyId}, #{agencyName}, #{agencyId})
+        values (#{empId}, #{empName}, #{agencyId})
     </insert>
 
-    <update agencyId="updateEmployee">
-        update employee set agency_id = #{agencyId} where emp_id = #{agencyId}
+    <update id="updateEmployee">
+        update employee set agency_id = #{agencyId} where emp_id = #{empId}
     </update>
 
-    <delete agencyId="deleteEmployee">
-        delete from employee where emp_id = #{agencyId}
+    <delete id="deleteEmployee">
+        delete from employee where emp_id = #{empId}
     </delete>
 
-    <select agencyId="selectAllEmployees" resultType="Employee">
-        select emp_id as agencyId, emp_name as agencyName, agency_id as agencyId from Employee
+    <select id="selectAllEmployees" resultType="Employee">
+        select emp_id as empId, emp_name as empName, agency_id as agencyId from Employee
     </select>
 
-    <resultMap agencyId="employeeResultMap" type="Employee">
-        <agencyId property="agencyId" column="emp_id" />
-        <result property="agencyName" column="emp_name"/>
+    <resultMap id="employeeResultMap" type="Employee">
+        <id property="empId" column="emp_id" />
+        <result property="empName" column="emp_name"/>
         <result property="agencyId" column="agency_id"/>
     </resultMap>
 
-    <select agencyId="selectEmployeeAsMap" resultType="map">
+    <select id="selectEmployeeAsMap" resultType="map">
         select emp_id, emp_name, agency_id
         from Employee
-        where emp_id = #{agencyId}
+        where emp_id = #{empId}
     </select>
 
-    <select agencyId="selectEmployeesAsMap" resultType="map">
+    <select id="selectEmployeesAsMap" resultType="map">
         select emp_id, emp_name, agency_id
         from Employee
     </select>
 
-    <select agencyId="selectEmployeesAsObjects" resultMap="employeeResultMap">
+    <select id="selectEmployeesAsObjects" resultMap="employeeResultMap">
         select emp_id, emp_name, agency_id
         from Employee
     </select>
 
 
     <!--
-    <update agencyId="createTable">
+    <update id="createTable">
         CREATE TABLE AGENCY (ID INT PRIMARY KEY, NAME VARCHAR(50))
     </update>
     -->

@@ -5,26 +5,26 @@
 
 <mapper namespace="Agency">
 
-    <select agencyId="selectAgency" resultType="agency">
-        select ID, NAME from AGENCY where
-        agencyId = #{agencyId}
+    <select id="selectAgency" resultType="agency">
+        select agency_id as agencyId, agency_name as agencyName from agency where
+        agency_id = #{agencyId}
     </select>
 
-    <insert agencyId="insertAgency">
-        insert into Agency (agencyId, agencyName)
-        values (#{agencyId}, #{agencyName})
+    <insert id="insertAgency">
+        insert into Agency (agency_id, agency_name, agency_location)
+        values (#{agencyId}, #{agencyName}, #{agencyLocation})
     </insert>
 
-    <update agencyId="updateAgency">
-        UPDATE AGENCY SET NAME = #{agencyName} WHERE ID = #{agencyId}
+    <update id="updateAgency">
+        update agency set agency_name = #{agencyName} where agency_id = #{agencyId}
     </update>
 
-    <delete agencyId="deleteAgency">
-        DELETE FROM AGENCY WHERE ID = #{agencyId}
+    <delete id="deleteAgency">
+        delete from agency where agency_id = #{agencyId}
     </delete>
 
-    <select agencyId="selectAllAgencies" resultType="Agency">
-        select * from Agency
+    <select id="selectAllAgencies" resultType="Agency">
+        select agency_id as agencyId, agency_name as agencyName, agency_location as agencyLocation from Agency
     </select>
 
 

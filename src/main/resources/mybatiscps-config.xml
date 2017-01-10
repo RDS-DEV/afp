@@ -9,18 +9,18 @@
         <package name="com.levelup.domain" />
     </typeAliases>
 
-    <environments default="development">
-        <environment id="development">
+    <environments default="developmentid">
+        <environment id="developmentid">
             <transactionManager type="JDBC" />
             <dataSource type="POOLED">
                 <!--
-                <property agencyName="driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
-                <property agencyName="url" value="jdbc:derby:myDB;create=true;user=me;password=me" />
-                <property agencyName="username" value="me" />
-                <property agencyName="password" value="me" />
+                <property name="driver" value="org.apache.derby.jdbc.EmbeddedDriver" />
+                <property name="url" value="jdbc:derby:myDB;create=true;user=me;password=me" />
+                <property name="username" value="me" />
+                <property name="password" value="me" />
                 -->
                 <property name="driver" value="com.mysql.jdbc.Driver" />
-                <property name="url" value="jdbc:mysql://localhost:3306/aes?verifyServerCertificate=false&amp;useSSL=true" />
+                <property name="url" value="jdbc:mysql://localhost:3306/cps?verifyServerCertificate=false&amp;useSSL=true" />
                 <property name="username" value="prpadmin" />
                 <property name="password" value="abcd1234" />
 
@@ -31,8 +31,8 @@
 
 
     <mappers>
-        <mapper resource="agency-mapper.xml" />
-        <mapper resource="employee-mapper.xml" />
-        <mapper resource="result-mapper.xml" />
+        <mapper resource="client-mapper.xml" />
+        <mapper resource="policy-mapper.xml" />
+        <mapper resource="resultcps-mapper.xml"/>
     </mappers>
 </configuration>
