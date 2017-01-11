@@ -1,0 +1,117 @@
+package gov;
+
+import gov.hhs.cms.afs.dao.AgencyDAO;
+import gov.hhs.cms.afs.dao.ClientDAO;
+import gov.hhs.cms.afs.dao.EmployeeDAO;
+import gov.hhs.cms.afs.dao.PolicyDAO;
+import gov.hhs.cms.afs.domain.Agency;
+import gov.hhs.cms.afs.domain.Client;
+import gov.hhs.cms.afs.domain.Employee;
+import gov.hhs.cms.afs.domain.Policy;
+
+import java.util.List;
+
+/**
+ * Created by jarsen on 1/11/17.
+ */
+public class AfsApp {
+
+    public static void main(String[] args) {
+
+        AfsApp afsApp = new AfsApp();
+
+        // Agency examples
+        afsApp.runAgencyExamples();
+
+        // Employee examples
+        afsApp.runEmployeeExamples();
+
+        // Policy examples
+        afsApp.runPolicyExamples();
+
+        // Client examples
+        afsApp.runClientExamples();
+
+    }
+
+    private void runAgencyExamples() {
+        // Agency examples
+        Agency agency;
+        Integer agencyId = 20;
+        List<Agency> agencies;
+
+        AgencyDAO agencyDAO = new AgencyDAO();
+
+        System.out.println("\nRetrieve agency data for agencyId = " + agencyId);
+        System.out.println("------------------------------------------------------------------------------------");
+        agency = agencyDAO.getAgencyById(agencyId);
+        System.out.println(agency.toString());
+        System.out.println("\nRetrieve all agencies");
+        System.out.println("------------------------------------------------------------------------------------");
+        agencies = agencyDAO.getAllAgencies();
+        for (Agency a : agencies) {
+            System.out.println(a.toString());
+        }
+    }
+
+    private void runEmployeeExamples() {
+        // Employee examples
+        Employee employee;
+        Integer employeeId = 104;
+        List<Employee> employees;
+
+        EmployeeDAO employeeDAO = new EmployeeDAO();
+
+        System.out.println("\n\nRetrieve Employee data for EmployeeId = " + employeeId);
+        System.out.println("------------------------------------------------------------------------------------");
+        employee = employeeDAO.getEmployeeById(employeeId);
+        System.out.println(employee.toString());
+        System.out.println("\nRetrieve all employees");
+        System.out.println("------------------------------------------------------------------------------------");
+        employees = employeeDAO.getAllEmployees();
+        for (Employee e : employees) {
+            System.out.println(e.toString());
+        }
+    }
+
+    private void runPolicyExamples() {
+        // Policy examples
+        Policy policy;
+        Integer policyId = 107;
+        List<Policy> policies;
+
+        PolicyDAO policyDAO = new PolicyDAO();
+
+        System.out.println("\n\nRetrieve Policy data for PolicyId = " + policyId);
+        System.out.println("------------------------------------------------------------------------------------");
+        policy = policyDAO.getPolicyById(policyId);
+        System.out.println(policy.toString());
+        System.out.println("\nRetrieve all policies");
+        System.out.println("------------------------------------------------------------------------------------");
+        policies = policyDAO.getAllPolicies();
+        for (Policy e : policies) {
+            System.out.println(e.toString());
+        }
+    }
+
+    private void runClientExamples() {
+        // Client examples
+        Client client;
+        Integer clientId = 8;
+        List<Client> clients;
+
+        ClientDAO clientDAO = new ClientDAO();
+
+        System.out.println("\n\nRetrieve Client data for ClientId = " + clientId);
+        System.out.println("------------------------------------------------------------------------------------");
+        client = clientDAO.getClientById(clientId);
+        System.out.println(client.toString());
+        System.out.println("\nRetrieve all clients");
+        System.out.println("------------------------------------------------------------------------------------");
+        clients = clientDAO.getAllClients();
+        for (Client e : clients) {
+            System.out.println(e.toString());
+        }
+    }
+
+}
