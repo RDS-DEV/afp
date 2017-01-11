@@ -2,6 +2,7 @@ package com.levelup.domain;
 
 import java.util.List;
 
+
 /**
  * Created by Monica.Vadlapudi on 1/3/2017.
  */
@@ -12,6 +13,7 @@ public class Policy {
     private int number;
     private int client_id;
     private int emp_id;
+
 
     public int getId() {
         return id;

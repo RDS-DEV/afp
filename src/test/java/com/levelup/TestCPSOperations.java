@@ -1,8 +1,7 @@
 package com.levelup;
 
-import com.levelup.domain.Agency;
+
 import com.levelup.domain.Client;
-import com.levelup.domain.Employee;
 import com.levelup.domain.Policy;
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;

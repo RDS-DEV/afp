@@ -1,5 +1,7 @@
 package com.levelup.domain;
 
+import java.util.List;
+
 /**
  * Created by jarsen on 12/28/16.
  */
@@ -8,6 +10,16 @@ public class Employee {
     private Integer empId;
     private String empName;
     private Integer agencyId;
+
+    public List<Policy> getPolicies() {
+        return policies;
+    }
+
+    public void setPolicies(List<Policy> policies) {
+        this.policies = policies;
+    }
+
+    private List<Policy> policies;
 
     public Integer getEmpId() {
         return empId;
@@ -33,9 +45,14 @@ public class Employee {
         this.agencyId = agencyId;
     }
 
+
     @Override
     public String toString() {
-        return "Employee [empId = " + empId + ", empName = " + empName + ", agencyId = " + agencyId + "]";
+        return "Employee{" +
+                "empId=" + empId +
+                ", empName='" + empName + '\'' +
+                ", agencyId=" + agencyId +
+                ", policies=" + policies +
+                '}';
     }
-
 }

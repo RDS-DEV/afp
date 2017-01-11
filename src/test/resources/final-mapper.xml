@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Results">
+
+    <resultMap id="allEmpPolRes" type="Employee">
+        <id property="empId" column="emp_id"/>
+        <result property="empName" column="emp_name"/>
+        <result property="agencyId" column="agency_id"/>
+
+        <collection property="policies" ofType="Policy">
+            <id property="id" column="policy_id" />
+            <result property="name" column="policy_name"/>
+            <result property="type" column="policy_type"/>
+            <result property="number" column="policy_number"/>
+            <result property="emp_id" column="emp_id"/>
+
+        </collection>
+
+    </resultMap>
+
+
+
+
+    <select id="selectEmployeJoinResult" resultMap="allEmpPolRes">
+        select E1.emp_id,E1.emp_name,E1.agency_id,P1.policy_id ,P1.policy_type , P1.policy_name , P1.emp_id
+        from aes.employee E1 Inner Join cps.policy P1
+        on (E1.emp_id = P1.emp_id)
+    </select>
+
+
+    <select id="selectEmployee" resultType="Employee">
+        select E1.emp_id as empId,E1.emp_name as empName,E1.agency_id as agencyId
+        from employee E1
+    </select>
+
+
+    <resultMap id="allPolicies" type="Policy">
+            <id property="id" column="policy_id" />
+            <result property="name" column="policy_name"/>
+            <result property="type" column="policy_type"/>
+            <result property="number" column="policy_number"/>
+            <result property="emp_id" column="emp_id"/>
+
+    </resultMap>
+
+    <select id="selectPolicy" resultMap="allPolicies">
+        select P1.policy_id ,P1.policy_type , P1.policy_name , P1.emp_id
+        from policy P1
+    </select>
+
+</mapper>
