@@ -9,6 +9,7 @@ import gov.hhs.cms.afs.domain.Client;
 import gov.hhs.cms.afs.domain.Employee;
 import gov.hhs.cms.afs.domain.Policy;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,10 @@ public class AfsApp {
             //afsApp.runClientExamples();
 
             // Report example
-            afsApp.runReportExample();
+            //afsApp.runReportExample();
+
+            // Process Report Input Data
+            afsApp.processReportInputData();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -55,6 +59,7 @@ public class AfsApp {
         System.out.println("------------------------------------------------------------------------------------");
         agency = agencyDAO.getAgencyById(agencyId);
         System.out.println(agency.toString());
+
         System.out.println("\nRetrieve all agencies");
         System.out.println("------------------------------------------------------------------------------------");
         agencies = agencyDAO.getAllAgencies();
@@ -142,6 +147,37 @@ public class AfsApp {
             System.out.println(p.toString());
         }
 
+    }
+
+    private void processReportInputData() {
+        List<Agency> agencies = getAgencies();
+        List<Policy> policies;
+
+        System.out.println("\n\n2016 End-of-Year Premium Report");
+
+        for (Agency a : agencies) {
+            System.out.println("\nAgency: " + a.getAgencyName() + ", " + a.getAgencyLocation() + '\n');
+            for (Employee e : a.getEmployees()) {
+                policies = getPolicies(e);
+                if (!(null == policies) && !policies.isEmpty()) {
+                    System.out.println("\tEmployee: " + e.getEmpName());
+                    System.out.println("\t\tPolicies sold:\n");
+                }
+            }
+        }
+
+    }
+
+    private List<Agency> getAgencies() {
+        AgencyDAO agencyDAO = new AgencyDAO();
+        return agencyDAO.getAllAgencies();
+    }
+
+    private List<Policy> getPolicies(Employee e) {
+        PolicyDAO policyDAO = new PolicyDAO();
+        List<Policy> policies = new ArrayList<Policy>();
+        policies.add(policyDAO.getPolicyById(107));
+        return policies;
     }
 
 }
