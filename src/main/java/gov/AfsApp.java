@@ -26,6 +26,9 @@ public class AfsApp {
 
         try {
 
+            // Report example
+            afsApp.runReportExample();
+
             // Agency examples
             //afsApp.runAgencyExamples();
 
@@ -37,9 +40,6 @@ public class AfsApp {
 
             // Client examples
             //afsApp.runClientExamples();
-
-            // Report example
-            afsApp.runReportExample();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -219,7 +219,7 @@ public class AfsApp {
         sb.append("Premium: " + setFieldWidth(formatMoneyValue(policy.getGrossPremium()), 12));
         sb.append("Client: " + setFieldWidth(policy.getClient().getName(), 11));
         sb.append("Client phone: " + setFieldWidth(policy.getClient().getPhone(), 11));
-        sb.append("City: " + setFieldWidth(policy.getClient().getCity(), 15));
+        sb.append("City: " + setFieldWidth(policy.getClient().getCity(), 13));
         sb.append("State: " + setFieldWidth(policy.getClient().getState(), 2));
         return sb.toString();
     }

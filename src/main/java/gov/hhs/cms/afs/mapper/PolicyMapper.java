@@ -10,7 +10,6 @@ import org.apache.ibatis.annotations.Select;
  */
 public interface PolicyMapper {
 
-
     @Results({
             @Result(property = "id", column = "policy_id"),
             @Result(property = "name", column = "policy_name"),
@@ -19,7 +18,12 @@ public interface PolicyMapper {
             @Result(property = "grossPremium", column = "gross_premium")
     })
     @Select("select * from Policy where policy_id = #{id}")
-    //@Select("select policy_id, policy_name, policy_type, policy_number, client_id, emp_id from Policy where policy_id = #{id}")
     Policy getPolicyById(int policyId);
+
+    // The select statement for the method getAllPolicies is mapped
+    // in the afs/policy-mapper.xml file. We need to figure out how
+    // to incorporate the @ResultMap annotation in these Mapper classes
+    // so we don't have to use the XML files any more.
+
 
 }
