@@ -1,6 +1,8 @@
 package gov.hhs.cms.afs.mapper;
 
 import gov.hhs.cms.afs.domain.Employee;
+import org.apache.ibatis.annotations.Result;
+import org.apache.ibatis.annotations.Results;
 import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
@@ -10,10 +12,22 @@ import java.util.List;
  */
 public interface EmployeeMapper {
 
-    @Select("select emp_id as empId, emp_name as empName, agency_id as agencyId from Employee where emp_id = #{empId}")
+    @Results({
+            @Result(property = "empId", column = "emp_id"),
+            @Result(property = "empName", column = "emp_name"),
+            @Result(property = "agencyId", column = "agency_id")
+    })
+    @Select("select * from Employee where emp_id = #{empId}")
     Employee getEmployeeById(int empId);
 
-    @Select("select emp_id as empId, emp_name as empName, agency_id as agencyId from Employee")
+    // There may be a way to assign an id to the results declaration
+    // and then reuse them just by giving the id. Maybe in v.3.4.3?
+    @Results({
+            @Result(property = "empId", column = "emp_id"),
+            @Result(property = "empName", column = "emp_name"),
+            @Result(property = "agencyId", column = "agency_id")
+    })
+    @Select("select * from Employee")
     List<Employee> getAllEmployees();
 
 }
