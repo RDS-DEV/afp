@@ -10,7 +10,9 @@ import gov.hhs.cms.afs.domain.Employee;
 import gov.hhs.cms.afs.domain.Policy;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by jarsen on 1/11/17.
@@ -36,10 +38,7 @@ public class AfsApp {
             //afsApp.runClientExamples();
 
             // Report example
-            //afsApp.runReportExample();
-
-            // Process Report Input Data
-            afsApp.processReportInputData();
+            afsApp.runReportExample();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -129,36 +128,17 @@ public class AfsApp {
     }
 
     private void runReportExample() {
-        AgencyDAO agencyDAO = new AgencyDAO();
-        PolicyDAO policyDAO = new PolicyDAO();
-        List<Agency> agencies;
-        List<Policy> policies;
-
-        agencies = agencyDAO.getAllAgencies();
-        policies = policyDAO.getAllPolicies();
-
-        System.out.println("\n\nAgencies: \n");
-        for (Agency a : agencies) {
-            System.out.println(a.toString());
-        }
-
-        System.out.println("\n\nPolicies:\n");
-        for (Policy p : policies) {
-            System.out.println(p.toString());
-        }
-
-    }
-
-    private void processReportInputData() {
         List<Agency> agencies = getAgencies();
         List<Policy> policies;
+
+        Map<Integer, List<Policy>> employeePolicyMap = mapEmployeesToPolicies();
 
         System.out.println("\n\n2016 End-of-Year Premium Report");
 
         for (Agency a : agencies) {
             System.out.println("\nAgency: " + a.getAgencyName() + ", " + a.getAgencyLocation() + '\n');
             for (Employee e : a.getEmployees()) {
-                policies = getPolicies(e);
+                policies = employeePolicyMap.get(e.getEmpId());
                 if (!(null == policies) && !policies.isEmpty()) {
                     System.out.println("\tEmployee: " + e.getEmpName());
                     System.out.println("\t\tPolicies sold:\n");
@@ -166,6 +146,30 @@ public class AfsApp {
             }
         }
 
+    }
+
+    private Map<Integer, List<Policy>> mapEmployeesToPolicies() {
+        List<Policy> policies;
+        Map<Integer, List<Policy>> employeePolicyMap = new HashMap<Integer, List<Policy>>();
+        PolicyDAO policyDAO = new PolicyDAO();
+        policies = policyDAO.getAllPolicies();
+
+        List<Policy> policyList;
+        for (Policy p : policies) {
+            p.getEmp_id();
+
+            if (employeePolicyMap.get(p.getEmp_id()) == null) {
+                policyList = new ArrayList<Policy>();
+                policyList.add(p);
+
+                employeePolicyMap.put(p.getEmp_id(), policyList);
+            } else {
+                policyList = employeePolicyMap.get(p.getEmp_id());
+                policyList.add(p);
+                employeePolicyMap.put(p.getEmp_id(), policyList);
+            }
+        }
+        return employeePolicyMap;
     }
 
     private List<Agency> getAgencies() {
