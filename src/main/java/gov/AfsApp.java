@@ -9,6 +9,8 @@ import gov.hhs.cms.afs.domain.Client;
 import gov.hhs.cms.afs.domain.Employee;
 import gov.hhs.cms.afs.domain.Policy;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -35,7 +37,9 @@ public class AfsApp {
             //afsApp.runClientExamples();
 
             // Report example
-            afsApp.runReportExample();
+            //afsApp.runReportExample();
+
+            afsApp.getListofPolicies();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -144,4 +148,32 @@ public class AfsApp {
 
     }
 
+    private void getListofPolicies() {
+        List<Policy> policies;
+        HashMap<Integer, ArrayList<Policy>> employeePolicyMap = new HashMap<Integer, ArrayList<Policy>>();
+        PolicyDAO policyDAO = new PolicyDAO();
+        policies = policyDAO.getAllPolicies();
+
+        ArrayList<Policy> policyList;
+        for (Policy p : policies) {
+            p.getEmp_id();
+
+            if (employeePolicyMap.get(p.getEmp_id()) == null) {
+                policyList = new ArrayList<Policy>();
+                policyList.add(p);
+
+                employeePolicyMap.put(p.getEmp_id(), policyList);
+            } else {
+                policyList = employeePolicyMap.get(p.getEmp_id());
+                policyList.add(p);
+                employeePolicyMap.put(p.getEmp_id(), policyList);
+            }
+        }
+        System.out.println(employeePolicyMap.toString());
+    }
 }
+
+
+
+
+
