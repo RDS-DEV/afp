@@ -9,6 +9,7 @@ import gov.hhs.cms.afs.domain.Client;
 import gov.hhs.cms.afs.domain.Employee;
 import gov.hhs.cms.afs.domain.Policy;
 
+import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -133,18 +134,34 @@ public class AfsApp {
 
         Map<Integer, List<Policy>> employeePolicyMap = mapEmployeesToPolicies();
 
-        System.out.println("\n\n2016 End-of-Year Premium Report");
+        System.out.println("\n\n2016 End-of-Year Premium Report\n");
 
+        String policyLine;
+        int policyPremium;
+        int agencyPremium;
+        int companyPremium = 0;
         for (Agency a : agencies) {
-            System.out.println("\nAgency: " + a.getAgencyName() + ", " + a.getAgencyLocation() + '\n');
+            agencyPremium = 0;
+            System.out.println("\nAgency: " + a.getAgencyName() + ", " + a.getAgencyLocation());
             for (Employee e : a.getEmployees()) {
+                policyPremium = 0;
                 policies = employeePolicyMap.get(e.getEmpId());
                 if (!(null == policies) && !policies.isEmpty()) {
-                    System.out.println("\tEmployee: " + e.getEmpName());
-                    System.out.println("\t\tPolicies sold:\n");
+                    System.out.println("\n\tEmployee: " + e.getEmpName());
+                    System.out.println("\t\tPolicies sold:");
+                    for (Policy policy : policies) {
+                        policyLine = getPolicyLine(policy);
+                        System.out.println("\t\t\t" + policyLine);
+                        policyPremium += policy.getGrossPremium();
+                    }
+                    System.out.println("\t\tEmployee premium subtotal: " + formatMoneyValue(policyPremium));
                 }
+                agencyPremium += policyPremium;
             }
+            System.out.println("\n\tAgency premium subtotal: " + formatMoneyValue(agencyPremium) + '\n');
+            companyPremium += agencyPremium;
         }
+        System.out.println("\nCompany premium subtotal: " + formatMoneyValue(companyPremium));
 
     }
 
@@ -192,6 +209,43 @@ public class AfsApp {
             amt = amt + p.getGrossPremium();
         }
         return amt;
+    }
+
+    private String getPolicyLine(Policy policy) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("ID: " + setFieldWidth(String.valueOf(policy.getId()), 5));
+        sb.append("Name: " + setFieldWidth(policy.getName(), 5));
+        sb.append("Type: " + setFieldWidth(policy.getType(), 23));
+        sb.append("Premium: " + setFieldWidth(formatMoneyValue(policy.getGrossPremium()), 12));
+        sb.append("Client: " + setFieldWidth(policy.getClient().getName(), 11));
+        sb.append("Client phone: " + setFieldWidth(policy.getClient().getPhone(), 11));
+        sb.append("City: " + setFieldWidth(policy.getClient().getCity(), 15));
+        sb.append("State: " + setFieldWidth(policy.getClient().getState(), 2));
+        return sb.toString();
+    }
+
+    private String setFieldWidth(String contents, int width) {
+
+        if (contents.length() > width) {
+            return contents.substring(0, width);
+        }
+
+        StringBuffer paddedContents = new StringBuffer(contents);
+        int paddingAmount = width - contents.length();
+        for (int i = 0; i <= paddingAmount; i++ ) {
+            paddedContents.append(" ");
+        }
+
+        return paddedContents.toString();
+    }
+
+    private String formatMoneyValue(int money) {
+        String moneyValue;
+
+        NumberFormat currencyFormatter = NumberFormat.getCurrencyInstance();
+        moneyValue = currencyFormatter.format(money);
+
+        return moneyValue;
     }
 
 }

@@ -12,18 +12,7 @@ public class Policy {
     private int client_id;
     private Client client;
     private int emp_id;
-
-
-    public int getGrossPremium() {
-        return grossPremium;
-    }
-
-    public void setGrossPremium(int grossPremium) {
-        this.grossPremium = grossPremium;
-    }
-
     private int grossPremium;
-
 
     public int getId() {
         return id;
@@ -81,7 +70,13 @@ public class Policy {
         this.emp_id = emp_id;
     }
 
+    public int getGrossPremium() {
+        return grossPremium;
+    }
 
+    public void setGrossPremium(int grossPremium) {
+        this.grossPremium = grossPremium;
+    }
 
     @Override
     public String toString() {
