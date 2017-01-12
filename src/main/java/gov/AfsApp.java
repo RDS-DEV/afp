@@ -170,10 +170,20 @@ public class AfsApp {
             }
         }
         System.out.println(employeePolicyMap.toString());
+
+        for (int key : employeePolicyMap.keySet()) {
+            System.out.println("------------------------------------------------");
+            System.out.println("Iterating ");
+            System.out.println("empid: " + key + " grossPremium: " + getEmployeePremiumTotal(employeePolicyMap.get(key)));
+        }
     }
+
+    private int getEmployeePremiumTotal(List<Policy> policyList) {
+        int amt = 0;
+        for (Policy p : policyList) {
+            amt = amt + p.getGrossPremium();
+        }
+        return amt;
+    }
+
 }
-
-
-
-
-

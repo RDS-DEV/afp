@@ -15,7 +15,8 @@ public interface PolicyMapper {
             @Result(property = "id", column = "policy_id"),
             @Result(property = "name", column = "policy_name"),
             @Result(property = "type", column = "policy_type"),
-            @Result(property = "number", column = "policy_number")
+            @Result(property = "number", column = "policy_number"),
+            @Result(property = "grossPremium", column = "gross_premium")
     })
     @Select("select * from Policy where policy_id = #{id}")
     //@Select("select policy_id, policy_name, policy_type, policy_number, client_id, emp_id from Policy where policy_id = #{id}")
