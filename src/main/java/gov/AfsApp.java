@@ -20,21 +20,30 @@ public class AfsApp {
 
         AfsApp afsApp = new AfsApp();
 
-        // Agency examples
-        afsApp.runAgencyExamples();
+        try {
 
-        // Employee examples
-        afsApp.runEmployeeExamples();
+            // Agency examples
+            //afsApp.runAgencyExamples();
 
-        // Policy examples
-        afsApp.runPolicyExamples();
+            // Employee examples
+            //afsApp.runEmployeeExamples();
 
-        // Client examples
-        afsApp.runClientExamples();
+            // Policy examples
+            //afsApp.runPolicyExamples();
+
+            // Client examples
+            //afsApp.runClientExamples();
+
+            // Report example
+            afsApp.runReportExample();
+
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
 
     }
 
-    private void runAgencyExamples() {
+    private void runAgencyExamples() throws Exception {
         // Agency examples
         Agency agency;
         Integer agencyId = 20;
@@ -112,6 +121,27 @@ public class AfsApp {
         for (Client e : clients) {
             System.out.println(e.toString());
         }
+    }
+
+    private void runReportExample() {
+        AgencyDAO agencyDAO = new AgencyDAO();
+        PolicyDAO policyDAO = new PolicyDAO();
+        List<Agency> agencies;
+        List<Policy> policies;
+
+        agencies = agencyDAO.getAllAgencies();
+        policies = policyDAO.getAllPolicies();
+
+        System.out.println("\n\nAgencies: \n");
+        for (Agency a : agencies) {
+            System.out.println(a.toString());
+        }
+
+        System.out.println("\n\nPolicies:\n");
+        for (Policy p : policies) {
+            System.out.println(p.toString());
+        }
+
     }
 
 }

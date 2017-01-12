@@ -7,7 +7,8 @@
 
     <resultMap id="agencyResult" type="agency">
         <id property="agencyId" column="agency_id" />
-        <result property="AgencyName" column="agency_name" />
+        <result property="agencyName" column="agency_name" />
+        <result property="agencyLocation" column="agency_location"/>
         <collection property="employees" javaType="ArrayList" column="id" ofType="Employee" select="selectEmployeesForAgency"/>
     </resultMap>
 
@@ -31,20 +32,20 @@
 
 
     <resultMap id="allAgenciesJoinResult" type="Agency">
-        <id property="id" column="agency_id" />
-        <result property="name" column="agency_name"/>
-        <result property="location" column="agency_location"/>
+        <id property="agencyId" column="agency_id" />
+        <result property="agencyName" column="agency_name"/>
+        <result property="agencyLocation" column="agency_location"/>
         <collection property="employees" ofType="Employee">
-            <id property="id" column="emp_id"/>
-            <result property="name" column="emp_name"/>
+            <id property="empId" column="emp_id"/>
+            <result property="empName" column="emp_name"/>
             <result property="agencyId" column="agency_id"/>
         </collection>
     </resultMap>
 
     <select id="selectAllAgenciesJoin" resultMap="allAgenciesJoinResult">
-       SELECT A.agency_id , A.agency_name as name,
-        A.agency_location as location,E.emp_id,E.emp_name
-        FROM AGENCY A LEFT OUTER JOIN EMPLOYEE E ON A.AGENCY_ID=E.AGENCY_ID
+        SELECT a.agency_id, a.agency_name,
+        a.agency_location, e.emp_id, e.emp_name
+        FROM Agency a LEFT OUTER JOIN Employee e ON a.agency_id = e.agency_id
     </select>
 
     <!--

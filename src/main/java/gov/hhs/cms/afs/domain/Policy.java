@@ -10,6 +10,7 @@ public class Policy {
     private String type;
     private int number;
     private int client_id;
+    private Client client;
     private int emp_id;
 
 
@@ -53,6 +54,14 @@ public class Policy {
         this.client_id = client_id;
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
+
     public int getEmp_id() {
         return emp_id;
     }
@@ -64,14 +73,20 @@ public class Policy {
 
     @Override
     public String toString() {
-        return "Policy{" +
+        StringBuilder sb = new StringBuilder();
+        sb.append(
+        "Policy{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", type='" + type + '\'' +
                 ", number=" + number +
                 ", client_id=" + client_id +
-                ", emp_id=" + emp_id +
-                '}';
+                ", emp_id=" + emp_id);
+        if (null != client) {
+            sb.append(", client=" + client.toString());
+        }
+        sb.append('}');
+        return sb.toString();
     }
 }
 

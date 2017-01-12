@@ -3,8 +3,17 @@
         PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 
+
+
+
 <configuration>
+
     <properties resource="afs/database.properties"/>
+
+    <typeAliases>
+        <package name="gov.hhs.cms.afs.domain" />
+    </typeAliases>
+
     <environments default="aes">
         <environment id="aes">
             <transactionManager type="JDBC"/>
@@ -26,6 +35,8 @@
         </environment>
     </environments>
     <mappers>
+        <mapper resource="afs/agency-mapper.xml"/>
+        <mapper resource="afs/policy-mapper.xml"/>
         <mapper class="gov.hhs.cms.afs.mapper.AgencyMapper" />
         <mapper class="gov.hhs.cms.afs.mapper.EmployeeMapper" />
         <mapper class="gov.hhs.cms.afs.mapper.PolicyMapper" />

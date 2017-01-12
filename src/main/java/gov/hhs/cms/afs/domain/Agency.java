@@ -46,6 +46,9 @@ public class Agency {
 
     @Override
     public String toString() {
-        return "Agency [agencyId = " + agencyId + ", agencyName = " + agencyName + ", employees = " + employees + "]";
+        return "Agency [agencyId = " + agencyId
+                + ", agencyName = " + agencyName
+                + ", agencyLocation = " + agencyLocation
+                + ", employees = " + employees + "]";
     }
 }

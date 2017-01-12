@@ -1,7 +1,5 @@
 package gov.hhs.cms.afs.domain;
 
-import java.util.List;
-
 /**
  * Created by Monica.Vadlapudi on 1/3/2017.
  */
@@ -12,7 +10,7 @@ public class Client {
     private String phone;
     private String city;
     private String state;
-    private List<Policy> policies;
+
     public Integer getId() {
         return id;
     }
@@ -53,14 +51,6 @@ public class Client {
         this.state = state;
     }
 
-    public List<Policy> getPolicies() {
-        return policies;
-    }
-
-    public void setPolicies(List<Policy> policies) {
-        this.policies = policies;
-    }
-
     @Override
     public String toString() {
         return "Client{" +
@@ -69,7 +59,6 @@ public class Client {
                 ", phone='" + phone + '\'' +
                 ", city='" + city + '\'' +
                 ", state='" + state + '\'' +
-                ", policies=" + policies +
                 '}';
     }
 }

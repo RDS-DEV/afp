@@ -22,11 +22,8 @@ public class AgencyDAO {
 
     public List<Agency> getAllAgencies() {
         SqlSession session = ConnectionFactory.getAesSqlSession();
-        AgencyMapper mapper = session.getMapper(AgencyMapper.class);
-        List<Agency> agencies = mapper.getAllAgencies();
-        session.close();
+        List<Agency> agencies = session.selectList("getAllAgencies");
         return agencies;
     }
-
 
 }
