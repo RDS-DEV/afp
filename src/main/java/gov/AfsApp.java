@@ -169,6 +169,7 @@ public class AfsApp {
                 employeePolicyMap.put(p.getEmp_id(), policyList);
             }
         }
+
         return employeePolicyMap;
     }
 
@@ -177,6 +178,7 @@ public class AfsApp {
         return agencyDAO.getAllAgencies();
     }
 
+
     private List<Policy> getPolicies(Employee e) {
         PolicyDAO policyDAO = new PolicyDAO();
         List<Policy> policies = new ArrayList<Policy>();
@@ -184,4 +186,13 @@ public class AfsApp {
         return policies;
     }
 
+    private int getEmployeePremiumTotal(List<Policy> policyList) {
+        int amt = 0;
+        for (Policy p : policyList) {
+            amt = amt + p.getGrossPremium();
+        }
+        return amt;
+    }
+
 }
+

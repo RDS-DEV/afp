@@ -14,6 +14,17 @@ public class Policy {
     private int emp_id;
 
 
+    public int getGrossPremium() {
+        return grossPremium;
+    }
+
+    public void setGrossPremium(int grossPremium) {
+        this.grossPremium = grossPremium;
+    }
+
+    private int grossPremium;
+
+
     public int getId() {
         return id;
     }
@@ -71,6 +82,7 @@ public class Policy {
     }
 
 
+
     @Override
     public String toString() {
         StringBuilder sb = new StringBuilder();
@@ -81,7 +93,8 @@ public class Policy {
                 ", type='" + type + '\'' +
                 ", number=" + number +
                 ", client_id=" + client_id +
-                ", emp_id=" + emp_id);
+                ", emp_id=" + emp_id +
+                ",grossPremium" + grossPremium );
         if (null != client) {
             sb.append(", client=" + client.toString());
         }
