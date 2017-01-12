@@ -26,6 +26,9 @@ public class AfsApp {
 
         try {
 
+            // Report example
+            afsApp.runReportExample();
+
             // Agency examples
             //afsApp.runAgencyExamples();
 
@@ -37,9 +40,6 @@ public class AfsApp {
 
             // Client examples
             //afsApp.runClientExamples();
-
-            // Report example
-            afsApp.runReportExample();
 
         } catch (Exception ex) {
             ex.printStackTrace();

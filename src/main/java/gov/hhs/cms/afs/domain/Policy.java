@@ -82,18 +82,18 @@ public class Policy {
     public String toString() {
         StringBuilder sb = new StringBuilder();
         sb.append(
-        "Policy{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", type='" + type + '\'' +
-                ", number=" + number +
-                ", client_id=" + client_id +
-                ", emp_id=" + emp_id +
-                ",grossPremium" + grossPremium );
+        "Policy[" +
+                "id = " + id +
+                ", name = " + name +
+                ", type = " + type +
+                ", number = " + number +
+                ", client_id = " + client_id +
+                ", emp_id = " + emp_id +
+                ", grossPremium = " + grossPremium );
         if (null != client) {
-            sb.append(", client=" + client.toString());
+            sb.append(", client = " + client.toString());
         }
-        sb.append('}');
+        sb.append(']');
         return sb.toString();
     }
 }

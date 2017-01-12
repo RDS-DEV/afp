@@ -46,9 +46,21 @@ public class Agency {
 
     @Override
     public String toString() {
-        return "Agency [agencyId = " + agencyId
-                + ", agencyName = " + agencyName
-                + ", agencyLocation = " + agencyLocation
-                + ", employees = " + employees + "]";
+        StringBuilder sb = new StringBuilder();
+        sb.append(
+                "Agency [" +
+                        "agencyId = " + agencyId +
+                        ", agencyName = " + agencyName +
+                        ", agencyLocation = " + agencyLocation);
+        if (null != employees) {
+            sb.append(", employees = [");
+            for (Employee e : employees) {
+                sb.append(e.toString() + ", ");
+            }
+            int lastCommaIndex = sb.lastIndexOf(",");
+            sb.delete(lastCommaIndex, lastCommaIndex + 2);
+        }
+        sb.append(']');
+        return sb.toString();
     }
 }

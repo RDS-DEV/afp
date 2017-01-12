@@ -20,14 +20,6 @@ public class PolicyDAO {
         return policy;
     }
 
-//    public List<Policy> getAllPolicies() {
-//        SqlSession session = ConnectionFactory.getCpsSqlSession();
-//        PolicyMapper mapper = session.getMapper(PolicyMapper.class);
-//        List<Policy> policies = mapper.getAllPolicies();
-//        session.close();
-//        return policies;
-//    }
-
     public List<Policy> getAllPolicies() {
         SqlSession session = ConnectionFactory.getCpsSqlSession();
         List<Policy> policies = session.selectList("getAllPolicies");
