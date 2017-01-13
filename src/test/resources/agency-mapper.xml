@@ -6,7 +6,7 @@
 <mapper namespace="Agency">
 
     <select id="selectAgency" resultType="agency">
-        select agency_id as agencyId, agency_name as agencyName from agency where
+        select agency_id as agencyId, agency_name as agencyName, agency_location as agencyLocation from agency where
         agency_id = #{agencyId}
     </select>
 

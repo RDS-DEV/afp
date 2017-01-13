@@ -123,8 +123,8 @@ public class AfsApp {
         System.out.println("\nRetrieve all clients");
         System.out.println("------------------------------------------------------------------------------------");
         clients = clientDAO.getAllClients();
-        for (Client e : clients) {
-            System.out.println(e.toString());
+        for (Client c : clients) {
+            System.out.println(c.toString());
         }
     }
 
