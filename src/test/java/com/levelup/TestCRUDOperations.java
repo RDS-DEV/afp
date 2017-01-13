@@ -34,20 +34,12 @@ public class TestCRUDOperations {
         SqlSessionFactory sqlSessionFactory = new SqlSessionFactoryBuilder().build(inputStream);
         session = sqlSessionFactory.openSession();
 
-        newAgency.setAgencyId(30);
-        newAgency.setAgencyName("Nationwide Insurance");
-        newAgency.setAgencyLocation("West Lafayette, IN");
-
-
-        newEmployee.setEmpName("James Thurber");
-        newEmployee.setAgencyId(20);
-
     }
 
     @Test
     public void testSelectOneAgency() {
 
-        System.out.println("\nSelectOneAgency: id = 10");
+        System.out.println("\nSelectOneAgency: id = 10\n------------------------");
         Agency agency = session.selectOne("selectAgency", 10);
         System.out.println(agency);
 
@@ -56,43 +48,16 @@ public class TestCRUDOperations {
     @Test
     public void testSelectAllAgencies() {
         List<Agency> agencies = session.selectList("selectAllAgencies");
+        System.out.println("\nSelectAllAgencies\n-----------------");
         for (Agency a : agencies) {
             System.out.println(a);
         }
     }
 
     @Test
-    public void testInsertNewAgency() {
-
-        System.out.println("\nInsertNewAgency: id = " + newAgency.getAgencyId());
-        session.insert("insertAgency", newAgency);
-        session.commit();
-
-    }
-
-    @Test
-    public void testUpdateOneAgency() {
-
-        System.out.println("\nUpdateNewAgency: name = Geico Insurance");
-        newAgency.setAgencyName("Geico Insurance");
-        session.update("updateAgency", newAgency);
-        session.commit();
-
-    }
-
-    @Test
-    public void testDeleteNewAgency() {
-
-        System.out.println("\nDeleteNewAgency: id = 30");
-        session.delete("deleteAgency", newAgency);
-        session.commit();
-
-    }
-
-    @Test
     public void testSelectOneEmployee() {
 
-        System.out.println("\nSelectOneEmployee: id = 104");
+        System.out.println("\nSelectOneEmployee: id = 104\n---------------------------");
         employee = session.selectOne("selectEmployee", 104);
         System.out.println(employee);
 
@@ -101,7 +66,7 @@ public class TestCRUDOperations {
     @Test
     public void testSelectEmployeeByName() {
 
-        System.out.println("\nSelectEmployeeByName: empName = 'Mel Torme'");
+        System.out.println("\nSelectEmployeeByName: empName = 'Mel Torme'\n-------------------------------------------");
         employee = session.selectOne("selectEmployeeByName", "Mel Torme");
         System.out.println(employee);
 
@@ -110,37 +75,42 @@ public class TestCRUDOperations {
     @Test
     public void testSelectAllEmployees() {
         List<Employee> employees = session.selectList("selectAllEmployees");
+        System.out.println("\nSelectAllEmployees\n------------------");
         for (Employee emp : employees) {
             System.out.println(emp);
         }
     }
 
     @Test
-    public void testInsertOneEmployee() {
+    public void testInsertUpdateDeleteNewAgency() {
+        System.out.println("\nInsertUpdateDeleteNewAgency\n---------------------------");
 
-        System.out.println("\nInsertOneEmployee: empId = " + newEmployee.getEmpId());
-        session.insert("insertEmployee", newEmployee);
-        newEmployee = session.selectOne("selectEmployeeByName", newEmployee.getEmpName());
-        System.out.println(newEmployee);
-        session.commit();
+        newAgency.setAgencyId(9999);
+        newAgency.setAgencyName("Nationwide Insurance");
+        newAgency.setAgencyLocation("West Lafayette, IN");
 
-    }
+        System.out.println("\nInsert new agency with id = 9999");
+        session.insert("insertAgency", newAgency);
 
-    @Test
-    public void testUpdateNewEmployee() {
+        System.out.println("Retrieve new agency with id = 9999");
+        Agency agency = session.selectOne("selectAgency", 9999);
+        System.out.println(agency);
 
-        System.out.println("\nUpdateNewEmployee: agencyId = 10");
-        newEmployee.setAgencyId(10);
-        session.update("updateEmployee", newEmployee);
-        session.commit();
+        System.out.println("\nUpdate new agency with id = 9999, set name = Geico Insurance");
+        newAgency.setAgencyName("Geico Insurance");
+        session.update("updateAgency", newAgency);
 
-    }
+        System.out.println("Retrieve updated agency with id = 9999");
+        agency = session.selectOne("selectAgency", 9999);
+        System.out.println(agency);
 
-    @Test
-    public void testDeleteNewEmployee() {
+        System.out.println("\nDelete agency with id = 9999");
+        session.delete("deleteAgency", newAgency);
 
-        System.out.println("\nDeleteNewEmployee: id = " + newEmployee.getEmpId());
-        session.delete("deleteEmployee", newEmployee);
+        System.out.println("Retrieve agency with id = 9999");
+        agency = session.selectOne("selectAgency", 9999);
+        System.out.println(agency);
+
         session.commit();
 
     }
