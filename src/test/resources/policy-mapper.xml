@@ -10,7 +10,17 @@
         select policy_id  as id , policy_name as name , policy_type as type , policy_number as number from Policy where policy_id = #{id}
     </select>
 
-    <select id="selectAllPolicies" resultType="Policy">
+
+    <resultMap id="allPolicies" type="Policy">
+        <id property="id" column="policy_id"/>
+        <result property="name" column="policy_name"/>
+        <result property="type" column="policy_type"/>
+        <result property="number" column="policy_number"/>
+        <result property="client_id" column="client_id"/>
+        <result property="emp_id" column="emp_id"/>
+        <result property="grossPremium" column="gross_premium"/>
+    </resultMap>
+    <select id="selectAllPolicies" resultMap="allPolicies">
         select * from Policy
     </select>
 
