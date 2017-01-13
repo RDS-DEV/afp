@@ -13,7 +13,7 @@ public class Policy {
     private int number;
     private int client_id;
     private int emp_id;
-
+    private int grossPremium;
 
     public int getId() {
         return id;
@@ -63,6 +63,13 @@ public class Policy {
         this.emp_id = emp_id;
     }
 
+    public int getGrossPremium() {
+        return grossPremium;
+    }
+
+    public void setGrossPremium(int grossPremium) {
+        this.grossPremium = grossPremium;
+    }
 
     @Override
     public String toString() {
@@ -73,9 +80,11 @@ public class Policy {
                 ", number=" + number +
                 ", client_id=" + client_id +
                 ", emp_id=" + emp_id +
+                ", grossPremium=" + grossPremium +
                 '}';
     }
 }
+
 
 
 
