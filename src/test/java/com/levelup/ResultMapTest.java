@@ -32,7 +32,8 @@ public class ResultMapTest {
 
     @Test
     public void testSelectEmployeeResultMap() {
-
+        System.out.println("\nSelect the employee with emp_id = 105 and return the result as a map \n"
+        + "where the key is the emp_id and the value is a map of the employee attributes.");
         Employee employee = new Employee();
         employee.setEmpId(105);
         Map<Object, Object> result = session.selectMap("selectEmployeeAsMap", employee, "emp_id");
@@ -41,16 +42,18 @@ public class ResultMapTest {
 
     @Test
     public void testSelectEmployeesResultMap() {
-
-        Map<Object, Object> result = session.selectMap("selectEmployeesAsMap", "emp_id");
+        System.out.println("\nSelect all employees and return the result as a map "
+                + "where each key \nis an emp_id and each value is a map of the employee attributes.");
+        Map<Object, Object> result = session.selectMap("selectEmployeesAsMap", "empId");
         System.out.println(result);
 
     }
 
     @Test
     public void testSelectEmployeeObjectsResultMap() {
-
-        Map<Object, Object> result = session.selectMap("selectEmployeesAsObjects", "id");
+        System.out.println("\nSelect all employees and return the result as a map "
+                + "where each \nkey is an emp_id and each value is an Employee object.");
+        Map<Object, Object> result = session.selectMap("selectEmployeesAsObjects", "empId");
         System.out.println(result);
 
     }
@@ -63,18 +66,11 @@ public class ResultMapTest {
 
     }
 
-    @Test
-    public void testSelectAllAgenciesAndEmployees() {
-
-        List<Agency> agencies = session.selectList("selectAllAgenciesResult");
-        System.out.println(agencies);
-
-    }
-
 
     @Test
     public void testSelectAllAgenciesJoin() {
-
+        System.out.println("\nSelect all agencies and include a list of all the employees "
+                + "in the employees attribute of the agency.");
         List<Agency> agencies = session.selectList("selectAllAgenciesJoin");
         System.out.println(agencies);
 
