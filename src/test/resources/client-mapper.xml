@@ -10,11 +10,16 @@
         client_id = #{id}
     </select>
 
-
-    <select id="selectAllClients" resultType="Client">
+    <resultMap id="allClient" type="Client">
+        <id property="id" column="client_id"/>
+        <result property="name" column="client_name"/>
+        <result property="phone" column="client_phone"/>
+        <result property="city" column="client_city"/>
+        <result property="state" column="client_state"/>
+    </resultMap>
+    <select id="selectAllClients" resultMap="allClient">
         select * from Client
     </select>
-
 
 
 </mapper>
