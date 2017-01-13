@@ -1,2 +1,2 @@
-# Analytics Framework Project
+# Analytics Framework System (AFS)
 
