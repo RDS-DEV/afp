@@ -45,12 +45,12 @@
     </select>
 
     <select id="selectEmployeesAsMap" resultType="map">
-        select emp_id, emp_name, agency_id
+        select emp_id as empId, emp_name as empName, agency_id
         from Employee
     </select>
 
     <select id="selectEmployeesAsObjects" resultMap="employeeResultMap">
-        select emp_id, emp_name, agency_id
+        select emp_id as empId, emp_name as empName, agency_id
         from Employee
     </select>
 
