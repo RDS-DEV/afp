@@ -34,18 +34,9 @@ public class ResultMapCpsTest {
 
 
     @Test
-    public void testSelectAllPoliciesResult() {
-
-        Policy policy = session.selectOne("selectAllPoliciesResult",  "id");
-        System.out.println(policy);
-
-    }
-
-
-    @Test
     public void testSelectPoliciesResult() {
 
-        Map<Object, Object> result = session.selectMap("selectPolicyResult", "id");
+        Map<Object, Object> result = session.selectMap("selectAllPoliciesResult", "id");
         System.out.println(result);
 
     }
