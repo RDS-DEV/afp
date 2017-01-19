@@ -128,7 +128,7 @@ public class AfsApp {
         }
     }
 
-    private void runReportExample() {
+    public void runReportExample() {
         List<Agency> agencies = getAgencies();
         List<Policy> policies;
 
