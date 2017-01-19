@@ -3,7 +3,6 @@ package gov.hhs.cms.afs.processor;
 /**
  * Created by Monica.Vadlapudi on 1/18/2017.
  */
-import gov.AfsApp;
 import org.springframework.batch.item.ItemProcessor;
 
 public class ReportProcessor implements ItemProcessor<AfsApp, AfsApp>   {
