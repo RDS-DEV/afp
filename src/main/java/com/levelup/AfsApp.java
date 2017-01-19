@@ -1,31 +1,40 @@
-package gov;
+package com.levelup;
 
+import gov.hhs.cms.afs.domain.Agency;
+import gov.hhs.cms.afs.domain.Client;
+import gov.hhs.cms.afs.domain.Employee;
+import gov.hhs.cms.afs.domain.Policy;
+import org.apache.ibatis.io.Resources;
+import org.apache.ibatis.session.SqlSession;
+import org.apache.ibatis.session.SqlSessionFactory;
+import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+import org.junit.Before;
+import org.junit.Test;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.sql.SQLException;
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
- * Created by jarsen on 1/11/17.
+ * Created by Monica.Vadlapudi on 1/19/2017.
  */
 public class AfsApp {
+    SqlSession session;
+     SqlSession session2;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws Exception {
 
-        AfsApp afsApp = new AfsApp();
+
+
 
         try {
-
-            // Report example
-           // afsApp.runReportExample();
-
-            // Agency examples
-            //afsApp.runAgencyExamples();
-
-            // Employee examples
-            //afsApp.runEmployeeExamples();
-
-            // Policy examples
-            //afsApp.runPolicyExamples();
-
-            // Client examples
-            //afsApp.runClientExamples();
+            AfsApp afsApp = new AfsApp();
+            afsApp.runReportExample();
 
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -33,88 +42,23 @@ public class AfsApp {
 
     }
 
-   /* private void runAgencyExamples() throws Exception {
-        // Agency examples
-        Agency agency;
-        Integer agencyId = 20;
-        List<Agency> agencies;
 
-        AgencyDAO agencyDAO = new AgencyDAO();
 
-        System.out.println("\nRetrieve agency data for agencyId = " + agencyId);
-        System.out.println("------------------------------------------------------------------------------------");
-        agency = agencyDAO.getAgencyById(agencyId);
-        System.out.println(agency.toString());
 
-        System.out.println("\nRetrieve all agencies");
-        System.out.println("------------------------------------------------------------------------------------");
-        agencies = agencyDAO.getAllAgencies();
-        for (Agency a : agencies) {
-            System.out.println(a.toString());
-        }
-    }
 
-    private void runEmployeeExamples() {
-        // Employee examples
-        Employee employee;
-        Integer employeeId = 104;
-        List<Employee> employees;
+    public void runReportExample() throws Exception{
 
-        EmployeeDAO employeeDAO = new EmployeeDAO();
 
-        System.out.println("\n\nRetrieve Employee data for EmployeeId = " + employeeId);
-        System.out.println("------------------------------------------------------------------------------------");
-        employee = employeeDAO.getEmployeeById(employeeId);
-        System.out.println(employee.toString());
-        System.out.println("\nRetrieve all employees");
-        System.out.println("------------------------------------------------------------------------------------");
-        employees = employeeDAO.getAllEmployees();
-        for (Employee e : employees) {
-            System.out.println(e.toString());
-        }
-    }
+        String resource = "final-config.xml";
+        InputStream inputStream = Resources.getResourceAsStream(resource);
+        System.out.println(inputStream.toString());
+        SqlSessionFactory sqlSessionFactory =  new SqlSessionFactoryBuilder().build(inputStream,"aes");
+        InputStream inputStream2 = Resources.getResourceAsStream(resource);
+        SqlSessionFactory sqlSessionFactory2 = new SqlSessionFactoryBuilder().build(inputStream2,"cps");
+        session = sqlSessionFactory.openSession();
+        session2= sqlSessionFactory2.openSession();
 
-    private void runPolicyExamples() {
-        // Policy examples
-        Policy policy;
-        Integer policyId = 107;
-        List<Policy> policies;
 
-        PolicyDAO policyDAO = new PolicyDAO();
-
-        System.out.println("\n\nRetrieve Policy data for PolicyId = " + policyId);
-        System.out.println("------------------------------------------------------------------------------------");
-        policy = policyDAO.getPolicyById(policyId);
-        System.out.println(policy.toString());
-        System.out.println("\nRetrieve all policies");
-        System.out.println("------------------------------------------------------------------------------------");
-        policies = policyDAO.getAllPolicies();
-        for (Policy e : policies) {
-            System.out.println(e.toString());
-        }
-    }
-
-    private void runClientExamples() {
-        // Client examples
-        Client client;
-        Integer clientId = 8;
-        List<Client> clients;
-
-        ClientDAO clientDAO = new ClientDAO();
-
-        System.out.println("\n\nRetrieve Client data for ClientId = " + clientId);
-        System.out.println("------------------------------------------------------------------------------------");
-        client = clientDAO.getClientById(clientId);
-        System.out.println(client.toString());
-        System.out.println("\nRetrieve all clients");
-        System.out.println("------------------------------------------------------------------------------------");
-        clients = clientDAO.getAllClients();
-        for (Client c : clients) {
-            System.out.println(c.toString());
-        }
-    }
-
-    public void runReportExample() {
         List<Agency> agencies = getAgencies();
         List<Policy> policies;
 
@@ -154,8 +98,7 @@ public class AfsApp {
     private Map<Integer, List<Policy>> mapEmployeesToPolicies() {
         List<Policy> policies;
         Map<Integer, List<Policy>> employeePolicyMap = new HashMap<Integer, List<Policy>>();
-        PolicyDAO policyDAO = new PolicyDAO();
-        policies = policyDAO.getAllPolicies();
+        policies = session.selectList("selectAllPolicies");
 
         List<Policy> policyList;
         for (Policy p : policies) {
@@ -177,15 +120,16 @@ public class AfsApp {
     }
 
     private List<Agency> getAgencies() {
-        AgencyDAO agencyDAO = new AgencyDAO();
-        return agencyDAO.getAllAgencies();
+
+        return session.selectList("selectAllAgencies");
     }
 
 
     private List<Policy> getPolicies(Employee e) {
-        PolicyDAO policyDAO = new PolicyDAO();
+       // PolicyDAO policyDAO = new PolicyDAO();
         List<Policy> policies = new ArrayList<Policy>();
-        policies.add(policyDAO.getPolicyById(107));
+        Policy policy = session.selectOne("selectPolicy", 107);
+        policies.add( policy);
         return policies;
     }
 
@@ -232,7 +176,7 @@ public class AfsApp {
         moneyValue = currencyFormatter.format(money);
 
         return moneyValue;
-    }*/
+    }
 
 }
 

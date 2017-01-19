@@ -6,13 +6,10 @@ package gov.hhs.cms.afs.processor;
 import gov.AfsApp;
 import org.springframework.batch.item.ItemProcessor;
 
-
-import java.util.List;
-
 public class ReportProcessor implements ItemProcessor<AfsApp, AfsApp>   {
 
     public  AfsApp process(AfsApp afsApp) throws Exception {
-        afsApp.runReportExample();
+       // afsApp.runReportExample();
         return null;
 
     }
