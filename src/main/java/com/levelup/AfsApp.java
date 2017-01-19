@@ -8,8 +8,7 @@ import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
-import org.junit.Before;
-import org.junit.Test;
+
 
 import java.io.IOException;
 import java.io.InputStream;
@@ -49,7 +48,7 @@ public class AfsApp {
     public void runReportExample() throws Exception{
 
 
-        String resource = "final-config.xml";
+        String resource = "configuration.xml";
         InputStream inputStream = Resources.getResourceAsStream(resource);
         System.out.println(inputStream.toString());
         SqlSessionFactory sqlSessionFactory =  new SqlSessionFactoryBuilder().build(inputStream,"aes");
@@ -98,7 +97,7 @@ public class AfsApp {
     private Map<Integer, List<Policy>> mapEmployeesToPolicies() {
         List<Policy> policies;
         Map<Integer, List<Policy>> employeePolicyMap = new HashMap<Integer, List<Policy>>();
-        policies = session.selectList("selectAllPolicies");
+        policies = session2.selectList("getAllPolicies");
 
         List<Policy> policyList;
         for (Policy p : policies) {
@@ -121,12 +120,11 @@ public class AfsApp {
 
     private List<Agency> getAgencies() {
 
-        return session.selectList("selectAllAgencies");
+        return session.selectList("getAllAgencies");
     }
 
 
     private List<Policy> getPolicies(Employee e) {
-       // PolicyDAO policyDAO = new PolicyDAO();
         List<Policy> policies = new ArrayList<Policy>();
         Policy policy = session.selectOne("selectPolicy", 107);
         policies.add( policy);

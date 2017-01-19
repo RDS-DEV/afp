@@ -5,7 +5,7 @@
 
 <configuration>
 
-    <properties resource="afs/database.properties"/>
+    <properties resource="database.properties"/>
 
     <typeAliases>
         <package name="gov.hhs.cms.afs.domain" />
@@ -32,11 +32,9 @@
         </environment>
     </environments>
     <mappers>
-        <mapper resource="afs/agency-mapper.xml"/>
-        <mapper resource="afs/policy-mapper.xml"/>
-        <mapper class="gov.hhs.cms.afs.mapper.AgencyMapper" />
-        <mapper class="gov.hhs.cms.afs.mapper.EmployeeMapper" />
-        <mapper class="gov.hhs.cms.afs.mapper.PolicyMapper" />
-        <mapper class="gov.hhs.cms.afs.mapper.ClientMapper" />
+        <mapper resource="agency-mapper.xml"/>
+        <mapper resource="policy-mapper.xml"/>
+        <mapper resource="employee-mapper.xml" />
+        <mapper resource="client-mapper.xml" />
     </mappers>
 </configuration>

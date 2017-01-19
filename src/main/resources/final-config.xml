@@ -6,7 +6,7 @@
 <configuration>
 
     <typeAliases>
-        <package name="com.levelup.domain" />
+        <package name="gov.hhs.cms.afs.domain" />
     </typeAliases>
 
     <environments default="development">
@@ -39,5 +39,8 @@
 
     <mappers>
         <mapper resource="final-mapper.xml" />
+        <mapper resource="mybatis-config.xml" />
+        <mapper resource="mybatiscps-config.xml" />
+        <mapper resource="result-mapper.xml" />
     </mappers>
 </configuration>
