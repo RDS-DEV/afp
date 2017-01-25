@@ -1,0 +1,54 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:batch="http://www.springframework.org/schema/batch" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/batch http://www.springframework.org/schema/batch/spring-batch-3.0.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd">
+
+
+
+    <!-- JobRepository and JobLauncher are configuration/setup classes -->
+    <bean id="jobRepository"
+          class="org.springframework.batch.core.repository.support.MapJobRepositoryFactoryBean" />
+
+    <bean id="jobLauncher"
+          class="org.springframework.batch.core.launch.support.SimpleJobLauncher">
+        <property name="jobRepository" ref="jobRepository" />
+    </bean>
+
+
+    <!-- ItemReader which reads from database and returns the row mapped by
+
+
+
+    <!- Optional JobExecutionListener to perform business logic before and after the job -->
+    <bean id="jobListener" class="gov.hhs.cms.afs.springbatch.AppResultJobListener" />
+
+    <!-- Optional ItemProcessor to perform business logic/filtering on the input records -->
+   <!-- <bean id="itemProcessor" class="com.levelup.AppResultItemProcessor" />-->
+
+    <!-- Step will need a transaction manager -->
+    <bean id="transactionManager"
+          class="org.springframework.batch.support.transaction.ResourcelessTransactionManager" />
+
+    <!-- Actual Job -->
+    <batch:job id="examResultJob"     >
+        <batch:step id="step1" allow-start-if-complete="yes" >
+            <batch:tasklet ref="fileDeletingTasklet" >
+
+            </batch:tasklet>
+        </batch:step>
+        <!--<batch:listeners>
+            <batch:listener ref="jobListener" />
+        </batch:listeners>-->
+    </batch:job>
+
+    <bean id="fileDeletingTasklet"
+                class="gov.hhs.cms.afs.springbatch.AppResultTasklet">
+       <!-- <property name="directoryResource">&ndash;&gt;
+            <bean id="directory"
+                        class="org.springframework.core.io.FileSystemResource">
+                <constructor-arg value="target/test-outputs/test-dir" />
+            </bean>
+        </property>-->
+    </bean>
+
+</beans>
